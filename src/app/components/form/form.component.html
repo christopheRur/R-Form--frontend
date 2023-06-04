@@ -1,0 +1,103 @@
+<h2>R-Form</h2>
+
+<form>
+  <input
+    name="email"
+    required
+    type="text"
+    id="fm"
+    placeholder="Email"
+    [(ngModel)]="emailStr"
+  />
+  <br />
+  <pre></pre>
+
+  <input
+    name="firstName"
+    placeholder="Recepient First Name"
+    type="text"
+    *ngIf="showInput"
+    [(ngModel)]="firstNameStr"
+  />
+  <pre></pre>
+
+  <input
+    name="lastName"
+    placeholder="Recepient Last Name"
+    type="text"
+    *ngIf="showInput"
+    [(ngModel)]="lastNameStr"
+  />
+
+  <pre></pre>
+  <button (click)="revealInput()" class="btn-6">+ MORE</button>
+  <pre></pre>
+  <pre></pre>
+
+  <input
+    name="subject"
+    required="true"
+    type="text"
+    class="sub"
+    placeholder="Subject..."
+    [(ngModel)]="subjectStr"
+  />
+
+  <pre></pre>
+
+  <textarea
+    name="message"
+    placeholder="Your request..."
+    class="reqA"
+    [(ngModel)]="messageStr"
+  ></textarea>
+
+  <pre></pre>
+
+  <input type="submit" value="Send Request" class="sndR" (click)="sendMsg()" />
+  <pre></pre>
+  <button class="clear-button" (click)="clearFields()">clear</button>
+</form>
+
+<pre></pre>
+
+<div class="confirmation" *ngIf="showStatus">
+  <br />
+  Message Sent!
+</div>
+
+<br />
+<pre></pre>
+
+<button (click)="revealHistory()" class="btn-6">Recent Requests</button>
+<Pre></Pre>
+<div class="history" *ngIf="showHistory">
+  <div *ngFor="let sender of senders">
+    <table>
+      <tr>
+        <th style="color: rgb(72, 197, 246); background-color: #f2f2f2">
+          Subject:
+          {{ sender.subject }}
+        </th>
+
+        <th><button class="delete-button" (click)="deleteSender(sender.id)">delete</button></th>
+      </tr>
+    </table>
+    <div> {{ sender.message }}</div>
+
+  </div>
+
+  <hr />
+  <br />
+</div>
+
+<br />
+<br />
+
+<footer>
+  <div class="container">
+    <marquee behavior="" direction="">
+      &copy; 2023 Developer christophe
+    </marquee>
+  </div>
+</footer>
