@@ -23,6 +23,8 @@ export class FormComponent implements OnInit {
   lastNameStr: string = '';
   firstNameStr: string = '';
   emailStr: string = '';
+  passwordStr: string='';
+  recipientEmailStr: string ='';
 
   contactForm: any;
   onSubmit() {
@@ -44,6 +46,10 @@ export class FormComponent implements OnInit {
 
   showStatus: boolean = false;
 
+  allowAccess: boolean = false;
+
+  hideBlock: boolean =true;
+
   public revealInput() {
     this.showInput = !this.showInput;
   }
@@ -57,30 +63,38 @@ export class FormComponent implements OnInit {
   public revealStatus() {
     this.showStatus = !this.showStatus;
   }
-
+/**
+ *Will reload the passage
+ */
   public refreshPage() {
     window.location.reload();
   }
-
+/**
+ *Clears all fields after
+ */
   public clearFields(): void {
     this.emailStr = '';
     this.firstNameStr = '';
     this.lastNameStr = '';
     this.subjectStr = '';
     this.messageStr = '';
+    this.recipientEmailStr='';
+
   }
 
   /**
-   *sends message to db
+   *Sends message to db
    * @param msg string
    */
   public sendMsg(): void {
     let msg = {
+      recipient: this.recipientEmailStr,
       email: this.emailStr,
       firstName: this.firstNameStr,
       lastName: this.lastNameStr,
       subject: this.subjectStr,
       message: this.messageStr,
+      password: this.passwordStr,
     };
 
     this.formService.sendMessage(msg).subscribe(
@@ -89,7 +103,7 @@ export class FormComponent implements OnInit {
 
         this.revealStatus();
 
-        this.refreshPage();
+        //this.refreshPage();
       },
 
       (error: HttpErrorResponse) => {
@@ -113,7 +127,44 @@ export class FormComponent implements OnInit {
       }
     );
   }
+/**
+ *Clears the login block from screen
+ */
+public clearLoginBlock(){
 
+this.hideBlock = false;
+
+
+
+}
+
+public loginUser(): void{
+
+  let credetials = {
+
+    email: this.emailStr,
+    password: this.passwordStr,
+
+  };
+
+  this.allowAccess=true;
+  this.clearLoginBlock();
+
+}
+
+public logUserOut(): void{
+
+  this.allowAccess=false;
+  this.hideBlock=true;
+  this.refreshPage();
+  console.log("Access ==> "+this.allowAccess)
+
+}
+
+/**
+ *Will remove sender from db
+ * @param senderId number
+ */
   public deleteSender(senderId: number) {
     this.formService.removeSender(senderId)
     .subscribe(

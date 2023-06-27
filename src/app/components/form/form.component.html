@@ -1,20 +1,39 @@
 <h2>R-Form</h2>
 
-<form>
-  <input
-    name="email"
+
+<div class="login-block" *ngIf="hideBlock">
+    <h1>WELCOME</h1>
+    <input  name="Username"
     required
     type="text"
     id="fm"
-    placeholder="Email"
-    [(ngModel)]="emailStr"
+    [(ngModel)]="emailStr"value="" placeholder="Username" id="username" />
+    <input type="password" [(ngModel)]="passwordStr" value="" placeholder="Password" id="password" required  />
+    <button (click)="loginUser()">Login</button>
+</div>
+
+<div *ngIf="allowAccess">My E-Mail:  {{emailStr}}
+  <button (click)="logUserOut()" class="logout">LOG OUT</button> </div>
+<div *ngIf="allowAccess">
+<form>
+  <input
+    name="Recepient"
+    required
+    type="text"
+    id="fm"
+    style="text-align: center;"
+    placeholder="Recepient Email"
+    [(ngModel)]="recipientEmailStr"
   />
+
+
+
   <br />
   <pre></pre>
 
   <input
     name="firstName"
-    placeholder="Recepient First Name"
+    placeholder="Your First Name"
     type="text"
     *ngIf="showInput"
     [(ngModel)]="firstNameStr"
@@ -23,7 +42,7 @@
 
   <input
     name="lastName"
-    placeholder="Recepient Last Name"
+    placeholder="Your Last Name"
     type="text"
     *ngIf="showInput"
     [(ngModel)]="lastNameStr"
@@ -93,7 +112,7 @@
 
 <br />
 <br />
-
+</div>
 <footer>
   <div class="container">
     <marquee behavior="" direction="">
