@@ -82,6 +82,7 @@ export class FormComponent implements OnInit {
 
   }
 
+
   /**
    *Sends message to db
    * @param msg string
@@ -150,6 +151,9 @@ public loginUser(): void{
   this.allowAccess=true;
   this.clearLoginBlock();
 
+}
+public singUp(): void {
+window.location.href='https://myaccount.google.com/security?hl=en';
 }
 
 public logUserOut(): void{

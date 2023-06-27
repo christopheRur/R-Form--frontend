@@ -10,6 +10,8 @@
     [(ngModel)]="emailStr"value="" placeholder="Username" id="username" />
     <input type="password" [(ngModel)]="passwordStr" value="" placeholder="Password" id="password" required  />
     <button (click)="loginUser()">Login</button>
+    <pre></pre>
+    <button (click)="singUp()" class="">Create Google password</button>
 </div>
 
 <div *ngIf="allowAccess">My E-Mail:  {{emailStr}}
